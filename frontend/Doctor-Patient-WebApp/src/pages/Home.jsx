@@ -8,11 +8,14 @@ import icon03 from '/src/assets/images/icon03.png'
 import featureImg from '/src/assets/images/feature-Img.png'
 import videoIcon from '/src/assets/images/video-icon.png'
 import avatarIcon from '/src/assets/images/avatar-icon.png'
+import faqImg from '/src/assets/images/faq-img.png'
 import { Link } from 'react-router-dom';
 import { BsArrowRight } from 'react-icons/bs';
 import About from '../components/About/About';
 import ServiceList from '../components/Services/ServiceList';
 import DoctorList from '../components/Doctors/DoctorList';
+import FaqList from '../components/faq/faqlist';
+import Testimonial from '../components/Testimonial/Testimonial';
 const Home = () => {
   return (
     <>
@@ -187,6 +190,44 @@ const Home = () => {
               Their commitment to excellence shapes a healthier, brighter future.🩺💙</p>
           </div>
           <DoctorList />
+        </div>
+      </section>
+
+      <section>
+        <div className="container">
+          <div className='flex justify-between gap-[50px] lg:gap-0'>
+            <div className='w-1/2 hidden md:block'>
+             <img src={faqImg}/>
+            </div>
+
+            <div className='w-full md:w-1/2'>
+             <h2 className='heading'>Frequently asked questions and doubts by our beloved patients</h2>
+
+             <FaqList />
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div className="container">
+          <div className='xl:w-[470px] mx-auto'>
+            <h2 className='heading text-center'>What Our Patients say</h2>
+            <p className='text__para text-center'>
+              <ul>
+                <li>
+                 1. The doctors here truly care! They listened to my concerns and provided the best treatment. I feel healthier than ever!"  -Mathew Thomas.
+                </li><br/>
+                <li>
+                  2. I was nervous about my surgery, but the medical team made me feel at ease. Their expertise and kindness made all the difference!"  -Michael Tae.
+                </li><br/>
+                <li>
+                  3. From consultation to recovery, everything was smooth and professional. Highly recommend this hospital!  -Nick Jonas.
+                </li>
+                </ul></p>
+          </div>
+          <Testimonial />
         </div>
       </section>
     </>
