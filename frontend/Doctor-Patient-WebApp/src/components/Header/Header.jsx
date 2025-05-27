@@ -48,14 +48,14 @@ useEffect(()=>{
   return ()=>window.removeEventListener('scroll', handleStickyHeader)
 })
 
-
+const toggleMenu=()=> menuRef.current.classList.toggle('show__menu')
   return <header className="header flex items-center" ref={headerRef}>
     <div className='container'>
       <div className='flex items-center justify-between'>
         <div>
           <img src={logo} alt="Logo" />
         </div>
-        <div className='navigation'>
+        <div className='navigation' ref={menuRef} onClick={toggleMenu}>
           <ul className='menu flex items-center gap-[2.7rem]'>
             {
               navLinks.map((link,index)=><li key={index}>
@@ -79,7 +79,7 @@ useEffect(()=>{
       Login
     </button>
   </Link>
-  <span className='md:hidden'>
+  <span className='md:hidden' onClick={toggleMenu}>
     <BiMenu className='w-6 h-6 cursor-pointer'></BiMenu>
   </span>
        </div>
