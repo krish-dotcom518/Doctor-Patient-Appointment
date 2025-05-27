@@ -5,11 +5,14 @@ import heroImg03 from '/src/assets/images/hero-Img03.png'
 import icon01 from '/src/assets/images/icon01.png'
 import icon02 from '/src/assets/images/icon02.png'
 import icon03 from '/src/assets/images/icon03.png'
+import featureImg from '/src/assets/images/feature-Img.png'
+import videoIcon from '/src/assets/images/video-icon.png'
+import avatarIcon from '/src/assets/images/avatar-icon.png'
 import { Link } from 'react-router-dom';
 import { BsArrowRight } from 'react-icons/bs';
 import About from '../components/About/About';
 import ServiceList from '../components/Services/ServiceList';
-
+import DoctorList from '../components/Doctors/DoctorList';
 const Home = () => {
   return (
     <>
@@ -123,9 +126,67 @@ const Home = () => {
         <div className="container">
           <div className='xl:w-[470px] mx-auto'>
             <h2 className='heading text-center'>Our medical Services</h2>
-            <p className='text__para'>🏥MediCare provides expert medical care with compassion and innovation!🩺✨From routine check-ups to specialized treatments, our world-class doctors ensure top-notch healthcare for everyone!🚀Your health, our priority!🌍💪</p>
+            <p className='text__para text-center'>🏥MediCare provides expert medical care with compassion and innovation!🩺✨From routine check-ups to specialized treatments, our world-class doctors ensure top-notch healthcare for everyone!🚀Your health, our priority!🌍💪</p>
           </div>
           <ServiceList />
+        </div>
+      </section>
+
+      <section>
+        <div className="container">
+          <div className='flex items-center  justify-between flex-col lg:flex-row'>
+            <div className='xl:w-[670px]'>
+              <h2 className='heading'>Get Virtual Treatment <br /> anytime.</h2>
+              <ul className='pl-4'>
+                <li className='text__para'>
+                  1.Schedule the appointment directly
+                </li>
+                <li className='text__para'>
+                  2.Search for your physician here, and contact their office.
+                </li>
+                <li className='text__para'>
+                  3.View our physicians who are accepting new patients, use the online scheduling tool to select an appointment time.
+                </li>
+              </ul>
+              <Link to='/'><button className="btn">Learn more</button></Link>
+            </div>
+<div className='relative z-10 xl:w-[770px] flex justify-end mt-[50px] lg:mt-0'>
+  <img src={featureImg} className='w-3/4' alt="Feature" />
+  <div className='w-[150px] lg:w-[248px] bg-white absolute bottom-[50px] left-0 md:bottom-[100px] 
+  md:left-5 z-20 p-2 pb-3 lg:pt-4 lg:px-4 lg:pb-[26px] rounded-[10px] flex flex-col items-center'>
+  <div className='flex items-center gap-[6px] lg:gap-3'>
+    <p className='text-[10px] leading-[10px] lg:text-[14px] lg:leading-5 text-headingColor font-[600]'>
+      Tue, 24
+    </p>
+    <p className='text-[10px] leading-[10px] lg:text-[14px] lg:leading-5 text-textColor font-[400]'>
+      10:00
+    </p>
+    <span className='w-6 h-6 lg:w-[40px] lg:h-[40px] flex items-center justify-center bg-yellowColor rounded-full py-1 px-[6px] lg:py-3 lg:px-[9px] ml-auto shadow-md'>
+  <img src={videoIcon} alt="Video Icon" className='w-4 h-4 lg:w-[20px] lg:h-[20px]' />
+</span>
+  </div>
+  <div className='w-[65px] lg:w-[96px] bg-[#CCF0F3] py-1 px-2 lg:py-[6px] lg:px-[10px] text-[8px] leading-[8px] 
+  lg:text-[12px] lg:leading-4 text-irisBlueColor font-[500] mt-2 rounded-full'>
+    Consultation
+  </div>
+  <div className='flex items-center gap=[6px] lg:gap-[10px] mt-2 lg:mt-[18px] '>
+    <img src={avatarIcon} />
+    <h4 className='text-[10px] leading-3 lg:text-[16px] lg:leading-[22px] font-[700] gtext-headingColor'>Manohar</h4>
+  </div>
+</div>
+</div>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div className="container">
+          <div className='xl:w-[470px] mx-auto'>
+            <h2 className='heading text-center'>Our Great Doctors</h2>
+            <p className='text__para text-center'>👨‍⚕️Medicare doctors are the heart of healthcare!🏥✨
+              With skill, dedication, and compassion, they bring healing and hope to countless lives. 
+              Their commitment to excellence shapes a healthier, brighter future.🩺💙</p>
+          </div>
+          <DoctorList />
         </div>
       </section>
     </>
