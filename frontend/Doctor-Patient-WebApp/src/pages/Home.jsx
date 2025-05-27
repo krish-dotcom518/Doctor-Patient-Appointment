@@ -8,6 +8,7 @@ import icon03 from '/src/assets/images/icon03.png'
 import { Link } from 'react-router-dom';
 import { BsArrowRight } from 'react-icons/bs';
 import About from '../components/About/About';
+import ServiceList from '../components/Services/ServiceList';
 
 const Home = () => {
   return (
@@ -118,6 +119,15 @@ const Home = () => {
       </section>
 
       <About />
+      <section>
+        <div className="container">
+          <div className='xl:w-[470px] mx-auto'>
+            <h2 className='heading text-center'>Our medical Services</h2>
+            <p className='text__para'>🏥MediCare provides expert medical care with compassion and innovation!🩺✨From routine check-ups to specialized treatments, our world-class doctors ensure top-notch healthcare for everyone!🚀Your health, our priority!🌍💪</p>
+          </div>
+          <ServiceList />
+        </div>
+      </section>
     </>
   );
 };
