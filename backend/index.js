@@ -17,7 +17,23 @@ app.get('/', (req,res)=>{
     res.send('Api is Working')
 })
 
+//database connection
+mongoose.set('strictQuery', false)
+const connectDB = async()=>{
+    try{
+        await mongoose.connect(process.env.MONGO_URL)
+        console.log("MongoDB database is connected")
+    }catch(err){
+        console.log("MongoDB database connection failed", err.message);
+    }
+}
+
+//middleware
+app.use(express.json())
+app.use(cookieParser())
+app.use(cors(corsOptions))
 
 app.listen(port, ()=>{
+    connectDB();
     console.log("Server is Running on port" + port)
 })
