@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import signupImg from '/src/assets/images/signup.gif';
 import avatar from '/src/assets/images/doctor-img01.png';
 import { Link } from 'react-router-dom';
+import uploadImageToCloudinary from '../utils/uploadCloudinary';
 const Signup = () => {
   const [selectedFile, setSelectedFile] = useState(null)
   const[previewURL, setPreviewURL] =useState('')
@@ -19,10 +20,14 @@ const Signup = () => {
     }
 
     const handleFileInputChange=async event=>{
-      const file = event.target.files[0]
+      const file = event.target.files[0];
+      const data = await uploadImageToCloudinary(file)
+
+      console.log(data)
     }
 
     const submitHandler=async event=>{
+      console.log(formData)
       event.preventDefault()
     }
 
@@ -39,7 +44,7 @@ const Signup = () => {
             <h3 className='text-headingColor text-[22px] leading-9 font-bold mb-10'>Create an <span className='text-primaryColor'>Account</span></h3>
             <form onSubmit={submitHandler}>
               <div className='mb-5'>
-            <input type='text' placeholder='Full Name' name='name' value={formData.name}
+            <input type='text' placeholder='Full Name' name='name' value={formData.name} onChange={handleInputChange}
             className='w-full pr-4 py-3 border-b border-solid border-[#0066ff61] focus: outline-none
              focus:border-b-primaryColor text-[20px] leading-7 text-headingColor placeholder:text-textColor rounded-md cursor-pointer' 
              required></input>
