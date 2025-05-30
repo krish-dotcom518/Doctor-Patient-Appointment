@@ -7,7 +7,7 @@ export const updateUser = async(req, res)=>{
     try{
     const updatedUser = await User.findByIdAndUpdate(id, {$set:req.body}, {new:true})
 
-    res.status(200).json({success:true, message:'Successfully updated', data:updateUser})
+    res.status(200).json({success:true, message:'Successfully updated', data:updatedUser})
 }catch{
     res.status(500).json({success:false, message:'Failed to updated'})
 }
@@ -64,7 +64,7 @@ export const getUserProfile = async(req, res)=>{
 
 export const getMyAppointments = async(req,res)=>{
     try {
-        const bookings = await Booking.find({useer:req.userId})
+        const bookings = await Booking.find({user:req.userId})
 
         const doctorIds = bookings.map(el=>el.doctor.id)
 

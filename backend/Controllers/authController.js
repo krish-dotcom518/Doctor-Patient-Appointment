@@ -46,7 +46,8 @@ export const register = async(req,res)=> {
                 password:hashPassword,
                 photo,
                 gender,
-                role
+                role,
+                isApproved: 'pending'
             })
         }
 
@@ -65,7 +66,7 @@ export const login = async(req,res)=> {
         let user =  null
 
         const patient = await User.findOne({email})
-        const doctor = await User.findOne({email})
+        const doctor = await Doctor.findOne({email})
 
         if(patient){
             user = patient
@@ -88,7 +89,7 @@ export const login = async(req,res)=> {
 
         const {password, role, appointments, ...rest} = user._doc
 
-        res.status(200).json({status: true, message: "Successfully Login", token, data:{...rest}, role})
+        res.status(200).json({status: true, message: "Successfully Login", token, data:{...rest, isApproved: user.isApproved,}, role})
     } catch (error) 
     {
         res.status(500).json({success:false, message:'Failed to Login' })

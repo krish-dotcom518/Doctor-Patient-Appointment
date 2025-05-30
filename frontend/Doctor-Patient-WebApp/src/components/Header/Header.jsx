@@ -35,9 +35,9 @@ const Header = () => {
   };
 
   return (
-    <header
+      <header
       ref={headerRef}
-      className="w-full bg-white py-4 shadow-md fixed top-0 left-0 z-50"
+      className="w-full bg-white py-4 shadow-md absolute top-0 left-0 z-50"
     >
       <div className="container mx-auto px-4 flex items-center justify-between">
         {/* Logo */}
@@ -46,7 +46,7 @@ const Header = () => {
         </Link>
 
         {/* Navigation Links */}
-        <nav className="hidden md:flex gap-8" ref={menuRef}>
+        <nav className="hidden md:flex gap-8 m-0 p-0 items-center" ref={menuRef}>
           {navLinks.map((link, index) => (
             <NavLink
               key={index}

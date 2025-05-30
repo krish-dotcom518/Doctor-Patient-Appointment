@@ -1,11 +1,11 @@
 import React from 'react'
 import { formateDate } from '../../utils/formateDate'
-const DoctorAbout = () => {
+const DoctorAbout = ({name, about, qualifications, experiences}) => {
   return (
     <div>
       <div>
         <h3 className='text-[20px] leading-[30px] text-headingColor font-semibold flex items-center gap-2'>About of 
-            <span className='text-irisBlueColor font-bold text-[24px] leading-9'>John Doe</span></h3>
+            <span className='text-irisBlueColor font-bold text-[24px] leading-9'>Shakthi</span></h3>
         <p className='text__para'>
             A Medicare surgeon is a skilled professional committed to quality surgical care, balancing precision and 
                   compassion to restore health. They excel in life-saving procedures, ethical standards, and continuous learning, 
