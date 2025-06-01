@@ -2,21 +2,28 @@ import {useContext} from 'react'
 import {BiMenu} from 'react-icons/bi'
 import { AuthContext } from '../../context/AuthContext'
 import { useNavigate } from 'react-router-dom'
+import { BASE_URL, token } from '../../config'
 const Tabs = ({tab, setTab}) => {
 
     const {dispatch} = useContext(AuthContext)
     const navigate = useNavigate()
+
+   
+    const handleLogout=()=>{
+        dispatch({type: 'LOGOUT'});
+        navigate('/')
+    }
 
     const handleDeleteAccount = async () => {
   const confirmDelete = window.confirm("Are you sure you want to delete your account? This action is irreversible.");
   if (!confirmDelete) return;
 
   try {
-    const res = await fetch('/api/users/delete-me', {
+    const res = await fetch(`${BASE_URL}/doctors/profile/me`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.getItem('token')}`, // or wherever you're storing the token
+        Authorization: `Bearer ${token}`,
       },
     });
 
@@ -32,11 +39,6 @@ const Tabs = ({tab, setTab}) => {
     alert(`Error: ${err.message}`);
   }
 };
-
-    const handleLogout=()=>{
-        dispatch({type: 'LOGOUT'});
-        navigate('/')
-    }
 
   return (
     <div>

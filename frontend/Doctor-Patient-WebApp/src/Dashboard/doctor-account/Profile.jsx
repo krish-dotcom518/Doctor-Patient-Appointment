@@ -25,19 +25,19 @@ const Profile = ({doctorData}) => {
   if (!doctorData) return;
 
   setFormData({
-    name: doctorData?.name || '',
-    email: doctorData?.email || '',
-    password: '', 
-    phone: doctorData?.phone || '',
-    bio: doctorData?.bio || '',
-    gender: doctorData?.gender || '',
-    specialization: doctorData?.specialization || '',
-    ticketPrice: doctorData?.ticketPrice || 0,
-    qualifications: doctorData?.qualifications || [],
-    experiences: doctorData?.experiences || [],
-    timeSlots: doctorData?.timeSlots || [],
-    about: doctorData?.about || '',
-    photo: doctorData?.photo || '',
+    name: doctorData?.name,
+    email: doctorData?.email,
+    password: doctorData.password, 
+    phone: doctorData?.phone ,
+    bio: doctorData?.bio ,
+    gender: doctorData?.gender ,
+    specialization: doctorData?.specialization ,
+    ticketPrice: doctorData?.ticketPrice,
+    qualifications: doctorData?.qualifications ,
+    experiences: doctorData?.experiences ,
+    timeSlots: doctorData?.timeSlots ,
+    about: doctorData?.about ,
+    photo: doctorData?.photo,
   })
 }, [doctorData])
 
@@ -88,16 +88,16 @@ const Profile = ({doctorData}) => {
       const res = await fetch(`${BASE_URL}/doctors/${doctorData._id}`,{
         method:'PUT',
         headers:{
-          'content-type':'apllication/json',
+          'content-type':'application/json',
           Authorization: `Bearer ${token}`
         },
         body: JSON.stringify(formData)
       })
       const result = await res.json()
       if(!res.ok){
-        throw Error(result.message)
+        throw new Error(result.message)
       }
-      toast.error(error.message)
+      toast.success(result.message)
     } catch (error) {
       toast.error(error.message)
     }
@@ -465,12 +465,9 @@ const Profile = ({doctorData}) => {
             accept="image/*"
           />
           {formData.photo && (
-            <img
-              src={formData.photo}
-              alt="Profile preview"
-              className="mt-3 w-32 h-32 object-cover rounded"
-            />
-          )}
+            <img src={formData.photo} 
+            className="mt-3 w-32 h-32 object-cover rounded"/>
+            )}
         </div>
 
         <button

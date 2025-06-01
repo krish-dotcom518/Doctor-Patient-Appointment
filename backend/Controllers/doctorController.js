@@ -1,17 +1,22 @@
 import Booking from '../models/BookingSchema.js';
 import Doctor from '../models/DoctorSchema.js'
 
-export const updateDoctor = async(req, res)=>{
-    const id = req.params.id
+export const updateDoctor = async (req, res) => {
+  const id = req.params.id;
 
-    try{
-    const updatedDoctor = await Doctor.findByIdAndUpdate(id, {$set:req.body}, {new:true})
-
-    res.status(200).json({success:true, message:'Successfully updated', data:updateDoctor})
-}catch{
-    res.status(500).json({success:false, message:'Failed to update'})
-}
+  try {
+    const updatedDoctor = await Doctor.findByIdAndUpdate(id, { $set: req.body }, { new: true });
+    if (!updatedDoctor) {
+      return res.status(404).json({ success: false, message: 'Doctor not found' });
+    }
+    res.status(200).json({ success: true, message: 'Successfully updated', data: updatedDoctor });
+  } 
+  catch (error) {
+    console.error("Error updating doctor:", error); 
+    res.status(500).json({ success: false, message: 'Failed to update', error: error.message });
+  }
 };
+
 
 export const deleteDoctor = async(req, res)=>{
     const id = req.params.id
