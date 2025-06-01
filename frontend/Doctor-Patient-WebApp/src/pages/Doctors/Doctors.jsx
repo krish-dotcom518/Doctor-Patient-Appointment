@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import DoctorCard from './../../components/Doctors/DoctorCard';
-import { doctors } from './../../assets/data/doctors';
 import Testimonial from './../../components/Testimonial/Testimonial';
 import { BASE_URL } from '../../config'
 import useFetchData from '../../hooks/useFetchData'
@@ -10,17 +9,17 @@ const Doctors = () => {
   const [query, setQuery] = useState('')
   const [debounceQuery, setDebounceQuery] = useState('');
   const handleSearch = ()=>{
-    setQuery(query.trim())
-    console.log('handle search')
+    const trimmed = query.trim();
+    setQuery(trimmed);
+    setDebounceQuery(trimmed);
   }
 
   useEffect(()=>{
     const timeout = setTimeout(()=>{
-      setDebounceQuery(query)
+      setDebounceQuery(query.trim())
     },700)
-
     return ()=> clearTimeout(timeout)
-  })
+  },[query])
   const {data:doctors, loading, error} = 
   useFetchData(`${BASE_URL}/doctors?query=${debounceQuery}`)
   
@@ -52,7 +51,7 @@ const Doctors = () => {
            {error && <Error/>}
           {!loading && !error && (<div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5'>
             {doctors.map((doctor) => (
-              <DoctorCard key={doctor.id} doctor={doctor} />
+              <DoctorCard key={doctor._id} doctor={doctor} />
             ))}
           </div>)}
         </div>

@@ -42,24 +42,31 @@ export const getSingleDoctor = async(req, res)=>{
 }
 };
 
-export const getAllDoctor = async(req, res)=>{
+export const getAllDoctor = async (req, res) => {
+  try {
+    const { query } = req.query;
+    console.log('Search query:', query);  // <-- Add this for debugging
 
-    try{
-        const { query } = req.query;
-        const doctors = query
-        ? await Doctor.find({
-      isApproved: 'approved',
-      $or: [
-        { name: { $regex: query, $options: 'i' } },
-        { specialization: { $regex: query, $options: 'i' } }
-      ]
-    }).select("-password")
-  : await Doctor.find({}).select("-password");
-    res.status(200).json({success:true, message:'Doctors Found', data: doctors,})
-}catch{
-    res.status(404).json({success:false, message:'Not Found'})
-}
+    const doctors = query
+      ? await Doctor.find({
+          $or: [
+            { name: { $regex: query, $options: 'i' } },
+            { specialization: { $regex: query, $options: 'i' } }
+          ]
+        }).select("-password")
+      : await Doctor.find({}).select("-password");
+
+    res.status(200).json({
+      success: true,
+      message: "Doctors Found",
+      data: doctors,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: "Server Error" });
+  }
 };
+
 export const getDoctorByProfile = async(req, res)=>{
     const doctorId = req.userId
         try {

@@ -10,10 +10,11 @@ import Error from '../../components/Error/Error'
 import { useParams } from 'react-router-dom'
 
 const DoctorDetails = () => {
+    const {id} = useParams()
   const {data:doctor, loading, error} = useFetchData(`${BASE_URL}/doctors/${id}`)
   const[tab,SetTab] = useState('about')
 
-  const {id} = useParams()
+
 
   const {
     name,
