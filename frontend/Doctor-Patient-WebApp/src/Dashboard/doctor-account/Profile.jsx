@@ -1,34 +1,57 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { AiOutlineDelete } from 'react-icons/ai'
+import uploadImageToCloudinary from './../../utils/uploadCloudinary';
 
-const Profile = () => {
+import {BASE_URL, token} from './../../config'
+import {toast} from 'react-toastify'
+const Profile = ({doctorData}) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    password: '',
     phone: '',
     bio: '',
     gender: '',
     specialization: '',
     ticketPrice: 0,
-    qualifications: [{ startingDate: '', endingDate: '', degree: '', university: '' }],
-    experiences: [{ startingDate: '', endingDate: '', position: '', hospital: '' }],
-    timeSlots: [{ day: '', startingTime: '', endingTime: '' }],
+    qualifications: [],
+    experiences: [],
+    timeSlots: [],
     about: '',
     photo: null,
   })
+
+  useEffect(() => {
+  if (!doctorData) return;
+
+  setFormData({
+    name: doctorData?.name || '',
+    email: doctorData?.email || '',
+    password: '', 
+    phone: doctorData?.phone || '',
+    bio: doctorData?.bio || '',
+    gender: doctorData?.gender || '',
+    specialization: doctorData?.specialization || '',
+    ticketPrice: doctorData?.ticketPrice || 0,
+    qualifications: doctorData?.qualifications || [],
+    experiences: doctorData?.experiences || [],
+    timeSlots: doctorData?.timeSlots || [],
+    about: doctorData?.about || '',
+    photo: doctorData?.photo || '',
+  })
+}, [doctorData])
+
 
   const handleInputChange = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
-  const handleFileInputChange = e => {
-    const file = e.target.files[0]
-    if (file) {
-      const reader = new FileReader()
-      reader.onload = () => setFormData(prev => ({ ...prev, photo: reader.result }))
-      reader.readAsDataURL(file)
-    }
-  }
+  const handleFileInputChange = async (e) => {
+  const file = e.target.files[0]
+  const data = await uploadImageToCloudinary(file)
+
+  setFormData({ ...formData, photo: data?.url }) // Corrected variable name
+}
 
   const addItem = (key, item) => {
     setFormData(prevFormData => ({
@@ -61,7 +84,23 @@ const Profile = () => {
 
   const updateProfileHandler = async e => {
     e.preventDefault()
-    // handle submit logic here
+    try {
+      const res = await fetch(`${BASE_URL}/doctors/${doctorData._id}`,{
+        method:'PUT',
+        headers:{
+          'content-type':'apllication/json',
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(formData)
+      })
+      const result = await res.json()
+      if(!res.ok){
+        throw Error(result.message)
+      }
+      toast.error(error.message)
+    } catch (error) {
+      toast.error(error.message)
+    }
   }
 
   // Corrected add/delete/handle functions for qualifications and experiences:
