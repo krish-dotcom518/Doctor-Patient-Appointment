@@ -19,7 +19,7 @@ const DoctorDetails = () => {
     name,
     qualifications,
     experiences,
-    timeslots,
+    timeSlots,
     reviews,
     bio,
     about,
@@ -67,7 +67,7 @@ const DoctorDetails = () => {
             </div>
           </div>
           <div>
-            <SidePanel />
+            <SidePanel doctorId={doctor._id} ticketPrice={ticketPrice} timeSlots={timeSlots}/>
           </div>
         </div>)}
       </div>
