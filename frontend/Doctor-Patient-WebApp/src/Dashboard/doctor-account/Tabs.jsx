@@ -7,6 +7,32 @@ const Tabs = ({tab, setTab}) => {
     const {dispatch} = useContext(AuthContext)
     const navigate = useNavigate()
 
+    const handleDeleteAccount = async () => {
+  const confirmDelete = window.confirm("Are you sure you want to delete your account? This action is irreversible.");
+  if (!confirmDelete) return;
+
+  try {
+    const res = await fetch('/api/users/delete-me', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`, // or wherever you're storing the token
+      },
+    });
+
+    if (!res.ok) {
+      const error = await res.json();
+      throw new Error(error.message || 'Failed to delete account');
+    }
+
+    // Logout and redirect
+    dispatch({ type: 'LOGOUT' });
+    navigate('/');
+  } catch (err) {
+    alert(`Error: ${err.message}`);
+  }
+};
+
     const handleLogout=()=>{
         dispatch({type: 'LOGOUT'});
         navigate('/')
@@ -43,7 +69,7 @@ const Tabs = ({tab, setTab}) => {
                     className='w-full bg-[#181A1E] p-3 text-[16px] leading-7 rounded-md text-white'>
                     Logout
                     </button>
-                    <button 
+                    <button onClick={handleDeleteAccount}
                     className='w-full bg-red-600 mt-4 p-3 text-[16px] leading-7 rounded-md text-white'>
                     Delete Account
                     </button>
