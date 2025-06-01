@@ -8,6 +8,7 @@ import userRoute from './Routes/user.js'
 import doctorRoute from './Routes/doctor.js'
 import reviewRoute from './Routes/review.js'
 dotenv.config()
+console.log("JWT_SECRET_KEY:", process.env.JWT_SECRET_KEY);
 
 const app= express()
 const port = process.env.PORT || 8000

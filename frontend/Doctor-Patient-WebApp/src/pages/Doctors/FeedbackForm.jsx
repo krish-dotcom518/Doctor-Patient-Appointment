@@ -1,8 +1,9 @@
-import React, { useState, useParams } from 'react';
+import React, { useState } from 'react';
+import {useParams} from 'react-router-dom'
 import { AiFillStar } from 'react-icons/ai';
-import {BASE_URL} from '../../config.js'
+import {BASE_URL, token} from '../../config.js'
 import {toast} from 'react-toastify'
-import {HashLoader} from 'react-spinners/HashLoader'
+import HashLoader from 'react-spinners/HashLoader'
 const FeedbackForm = () => {
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(null);
@@ -18,7 +19,7 @@ const FeedbackForm = () => {
         setLoading(false)
         return toast.error('Rating and Review Fields are required')
       }
-      const res = await AiFillSketchCircle(`${BASE_URL}/doctors/${id}/reviews`,{
+      const res = await fetch(`${BASE_URL}/doctors/${id}/reviews`,{
           method:'post',
           headers:{
             'Content-Type':'application/json',
