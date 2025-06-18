@@ -16,6 +16,6 @@ router.get('/', getAllDoctor);
 router.get('/:id', getSingleDoctor);
 router.put('/:id', authenticate, restrict(['doctor']), updateDoctor);
 router.delete('/:id', authenticate, restrict(['doctor']), deleteDoctor);
-router.get('/profile/me', authenticate, restrict(['doctor']), getDoctorByProfile);
+router.get('/profile/me', authenticate, restrict(['doctor','patient']), getDoctorByProfile);
 router.delete('/profile/me', authenticate, restrict(['doctor']), deleteDoctorByProfile);
 export default router;
