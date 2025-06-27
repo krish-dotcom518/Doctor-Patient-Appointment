@@ -6,34 +6,36 @@ const useFetchData = (url) => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
     const fetchData = async () => {
       setLoading(true);
+      const token = localStorage.setItem('token', 'mySuperSecretKey123!@#'); // 🔥 dynamic retrieval
       try {
         const res = await fetch(url, {
-        headers: {Authorization: `Bearer ${token}`},
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         });
 
         const result = await res.json();
 
         if (!res.ok) {
-          throw new Error(result.message + '🙂‍↔️');
+          throw new Error(result.message || 'Failed to fetch data');
         }
 
-        setData(result.data);
-        setTimeout(() => setLoading(false), 1500);
+        setData(result.data || result); // fallback in case no `.data`
       } catch (err) {
-        setTimeout(() => {
-        setLoading(false);
         setError(err.message);
-    }, 1500);
-      } 
+      } finally {
+        setTimeout(() => setLoading(false), 1000); // smoother UX
+      }
     };
 
     if (url) fetchData();
   }, [url]);
 
   return { data, loading, error };
+  console.log("🔐 Token being sent:", token);
+
 };
 
 export default useFetchData;

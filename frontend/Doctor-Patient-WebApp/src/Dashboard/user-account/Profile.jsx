@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import uploadImageToCloudinary from '../../utils/uploadCloudinary';
-import {BASE_URL, token} from '../../config.js'
+import {BASE_URL} from '../../config.js'
 import {toast} from 'react-toastify';
 import HashLoader from 'react-spinners/HashLoader';
 const Profile = ({user}) => {
@@ -55,7 +55,7 @@ const Profile = ({user}) => {
           method:'put',
           headers:{
             'content-type':'application/json',
-            Authorization: `Bearer ${token}`
+            Authorization: `Bearer ${localStorage.getItem("token")}`
           },
           body: JSON.stringify(formData),
         })

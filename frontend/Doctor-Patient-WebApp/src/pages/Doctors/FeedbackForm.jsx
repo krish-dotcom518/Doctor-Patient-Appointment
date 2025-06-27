@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {useParams} from 'react-router-dom'
 import { AiFillStar } from 'react-icons/ai';
-import {BASE_URL, token} from '../../config.js'
+import {BASE_URL} from '../../config.js'
 import {toast} from 'react-toastify'
 import HashLoader from 'react-spinners/HashLoader'
 const FeedbackForm = () => {
@@ -23,7 +23,7 @@ const FeedbackForm = () => {
           method:'post',
           headers:{
             'Content-Type':'application/json',
-            Authorization: `Bearer ${token}`
+            Authorization: `Bearer ${localStorage.getItem("token")}`
           },
           body: JSON.stringify({rating, reviewText})
         })

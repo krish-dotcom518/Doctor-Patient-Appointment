@@ -2,7 +2,7 @@ import {useContext} from 'react'
 import {BiMenu} from 'react-icons/bi'
 import { AuthContext } from '../../context/AuthContext'
 import { useNavigate } from 'react-router-dom'
-import { BASE_URL, token } from '../../config'
+import { BASE_URL} from '../../config'
 const Tabs = ({tab, setTab}) => {
 
     const {dispatch} = useContext(AuthContext)
@@ -23,7 +23,7 @@ const Tabs = ({tab, setTab}) => {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     });
 
