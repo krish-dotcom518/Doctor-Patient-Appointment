@@ -8,7 +8,7 @@ const useFetchData = (url) => {
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
-      const token = localStorage.setItem('token', 'mySuperSecretKey123!@#'); // 🔥 dynamic retrieval
+      const token = localStorage.getItem('token'); // 🔥 dynamic retrieval
       try {
         const res = await fetch(url, {
           headers: {
