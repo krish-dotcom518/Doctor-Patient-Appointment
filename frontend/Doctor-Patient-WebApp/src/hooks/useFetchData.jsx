@@ -34,7 +34,6 @@ const useFetchData = (url) => {
   }, [url]);
 
   return { data, loading, error };
-  console.log("🔐 Token being sent:", token);
 
 };
 
